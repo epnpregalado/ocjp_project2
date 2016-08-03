@@ -24,7 +24,7 @@ import epn.edu.ec.ocjp.services.commons.Utilitario;
 
 /**
  *
- * @author USRLAM
+ * @author pregalado
  */
 public class AlquilerVehiculo {
 	//ArrayList <Vehiculo> vehiculos=null;
