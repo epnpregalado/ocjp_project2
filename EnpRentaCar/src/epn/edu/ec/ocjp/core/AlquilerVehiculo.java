@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
@@ -206,7 +205,7 @@ public class AlquilerVehiculo {
 	/**
 	 * Permite buscar en el catalogo por código 
 	 */
-	private static void buscarPorCodigo() {
+	private static String buscarPorCodigo() {
 
 		try {
 			Scanner dataCar = new Scanner (System.in);
@@ -225,23 +224,9 @@ public class AlquilerVehiculo {
 					Pattern patron = Pattern.compile("COD\\w\\w\\w\\w\\w\\w");
 					Matcher coincidencia = patron.matcher(linea);
 					while(coincidencia.find()) {
-						prestamo.getVehiculo().setCodigo(coincidencia.group());
+						return linea;
 					}
 				}
-				
-				String fechaPrestamo = dataCar.nextLine();
-				System.out.println("Ingrese el número de días de préstamo: ");
-				String numeroDiasPrestamo = dataCar.nextLine();
-				
-				Locale locale = new Locale("es", "EC");
-				Calendar cal = Calendar.getInstance(locale);
-				cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(numeroDiasPrestamo));
-				Date dateEntregaEsperada = cal.getTime();             
-				SimpleDateFormat format1 = new SimpleDateFormat("yyyy/MM/dd");
-				String fechaEntregaEsperada = format1.format(dateEntregaEsperada);
-				prestamo.setFechaEntregaEsperada(dateEntregaEsperada);
-				
-				Utilitario.generarFormatoArchivo(prestamo.getVehiculo().getCodigo().toString(), new StringBuilder(), "COD");
 				
 			}else{
 				System.out.println("No existe catalogo de autos");
@@ -251,6 +236,7 @@ public class AlquilerVehiculo {
 		} catch (IOException e) {
 			System.out.println("Ha ocurrido un error: " + e);
 		}
+		return null;
 	}
 
 	/**
@@ -324,10 +310,15 @@ public class AlquilerVehiculo {
 		}
 		
 		System.out.println("Ingresar código del auto: ");
-		buscarPorCodigo();
+		String linea = buscarPorCodigo();
+			
+	}
+	
+	public static void obtenerCodigoItemDisponible() {
 		
 	}
 
+	
 	/**
 	 * Proceso que permite registrar la devolucion del vehiculo
 	 */
