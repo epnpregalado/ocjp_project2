@@ -143,6 +143,7 @@ public class AlquilerVehiculo {
 		}
 	}
 
+	
 	private static void generarFormatoCatalogoAuto(String elemento, StringBuilder propiedad, String prefijo) {
 		int value = 15 - elemento.length();
 		for(int i = 0; i < value; i++) {
@@ -311,14 +312,31 @@ public class AlquilerVehiculo {
 		
 		System.out.println("Ingresar código del auto: ");
 		String linea = buscarPorCodigo();
-			
-	}
-	
-	public static void obtenerCodigoItemDisponible() {
+		
+		Pattern patron = Pattern.compile("COD\\w\\w\\w\\w\\w\\w");
+		Matcher coincidencia = patron.matcher(linea);
+		Prestamo prestamo = new Prestamo();
+		
+		while(coincidencia.find()) {//Este metodo muestra los indices donde encontro de manera automatica
+			prestamo.setVehiculo(new Vehiculo());
+			prestamo.getVehiculo().setCodigo(coincidencia.group());
+		}
+		
+		System.out.println("Número de días para el préstamo: ");
+		Scanner dataCar = new Scanner (System.in);
+		String diasPrestamo = dataCar.nextLine();
+		
+		Locale locale = new Locale("es", "EC");
+		Calendar cal = Calendar.getInstance(locale);
+		prestamo.setFechaPrestamo(cal.getTime());
+		
+		cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(diasPrestamo));
+		Date dateEntregaEsperada = cal.getTime(); 
+		prestamo.setFechaEntregaEsperada(dateEntregaEsperada);
+		prestamo.registrarPrestamo(prestamo);
 		
 	}
 
-	
 	/**
 	 * Proceso que permite registrar la devolucion del vehiculo
 	 */
