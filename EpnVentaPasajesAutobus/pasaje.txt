@@ -23,3 +23,9 @@ Nombre pasajero: marco diaz        CEDULA: 1234567876
 RUTA: UIOPIL QUITO-PILLARO        HORA DE SALIDA: 22H00
 Valor del pasaje: 13.0
 Nombre pasajero: santiago diaz        CEDULA: 1234532356
+===================================================================
+          COOPERATIVA:  ESMERALDAS              
+===================================================================
+RUTA: UIOESM QUITO-ESMERALDAS        HORA DE SALIDA: 19H00
+Valor del pasaje: 12.0
+Nombre pasajero: Patricio regalado        CEDULA: 1234567890
